@@ -15,7 +15,7 @@ class SettingsTests(TestCase):
     def test_first_login_is_enabled_by_default(self) -> None:
         with TemporaryDirectory() as directory:
             path = Path(directory) / "settings.ini"
-            self.assertFalse(autostart_enabled(path))
+            self.assertTrue(autostart_enabled(path))
             self.assertFalse(first_run_completed(path))
             self.assertTrue(should_autostart(path))
 
@@ -32,6 +32,7 @@ class SettingsTests(TestCase):
             path = Path(directory) / "settings.ini"
             set_first_run_completed(True, path)
             self.assertTrue(first_run_completed(path))
+            set_autostart_enabled(False, path)
             self.assertFalse(should_autostart(path))
 
     def test_login_preference_preserves_first_run_state(self) -> None:

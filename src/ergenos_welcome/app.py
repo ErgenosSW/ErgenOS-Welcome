@@ -81,12 +81,39 @@ class WelcomeWindow(Adw.ApplicationWindow):
         content.append(version)
 
         if is_live_environment():
-            install_button = Gtk.Button(label="Install ErgenOS")
-            install_button.set_icon_name("system-software-install-symbolic")
+            install_button = Gtk.Button()
             install_button.add_css_class("suggested-action")
-            install_button.add_css_class("pill")
             install_button.set_halign(Gtk.Align.CENTER)
             install_button.connect("clicked", self._launch_installer)
+
+            install_content = Gtk.Box(
+                orientation=Gtk.Orientation.HORIZONTAL,
+                spacing=12,
+            )
+            install_content.set_margin_top(8)
+            install_content.set_margin_bottom(8)
+            install_content.set_margin_start(18)
+            install_content.set_margin_end(18)
+            install_content.append(
+                Gtk.Image.new_from_icon_name("system-software-install-symbolic")
+            )
+
+            install_labels = Gtk.Box(
+                orientation=Gtk.Orientation.VERTICAL,
+                spacing=2,
+            )
+            install_labels.set_halign(Gtk.Align.START)
+            install_title = Gtk.Label(label="Install ErgenOS", xalign=0)
+            install_title.add_css_class("heading")
+            install_labels.append(install_title)
+            install_labels.append(
+                Gtk.Label(
+                    label="Install ErgenOS on this computer",
+                    xalign=0,
+                )
+            )
+            install_content.append(install_labels)
+            install_button.set_child(install_content)
             content.append(install_button)
 
         system_group = Adw.PreferencesGroup(title="System")
@@ -124,18 +151,19 @@ class WelcomeWindow(Adw.ApplicationWindow):
         )
         content.append(resources)
 
-        preferences = Adw.PreferencesGroup(title="Preferences")
-        launch_switch = Adw.SwitchRow(
-            title="Show at every login",
-            subtitle="Open ErgenOS Welcome after future sign-ins",
-        )
-        launch_switch.set_active(autostart_enabled())
-        launch_switch.connect(
-            "notify::active",
-            lambda row, _value: set_autostart_enabled(row.get_active()),
-        )
-        preferences.add(launch_switch)
-        content.append(preferences)
+        if not is_live_environment():
+            preferences = Adw.PreferencesGroup(title="Preferences")
+            launch_switch = Adw.SwitchRow(
+                title="Show at every login",
+                subtitle="Open ErgenOS Welcome after future sign-ins",
+            )
+            launch_switch.set_active(autostart_enabled())
+            launch_switch.connect(
+                "notify::active",
+                lambda row, _value: set_autostart_enabled(row.get_active()),
+            )
+            preferences.add(launch_switch)
+            content.append(preferences)
 
     @staticmethod
     def _on_close_request(_window: Gtk.Window) -> bool:

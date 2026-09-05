@@ -11,8 +11,8 @@ The application is intentionally read-only. It does not install packages, modify
 - ErgenCTL availability indicator
 - ErgenOS installer launcher visible only in the live ISO
 - links to ErgenOS, ErgenCTL and the issue tracker
-- automatic first-login startup
-- optional startup after future logins
+- automatic startup after login, enabled by default
+- user-controlled login startup in the installed system
 
 ## Development
 

@@ -13,7 +13,7 @@ def config_path() -> Path:
 
 
 def autostart_enabled(path: Path | None = None) -> bool:
-    return _read_boolean("launch_at_login", False, path)
+    return _read_boolean("launch_at_login", True, path)
 
 
 def first_run_completed(path: Path | None = None) -> bool:
