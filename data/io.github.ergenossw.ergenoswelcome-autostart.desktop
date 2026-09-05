@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=ErgenOS Welcome
+Comment=Show ErgenOS Welcome after signing in
+Exec=ergenos-welcome --autostart
+Icon=io.github.ergenossw.ergenoswelcome
+Terminal=false
+Type=Application
+OnlyShowIn=GNOME;
+X-GNOME-Autostart-enabled=true

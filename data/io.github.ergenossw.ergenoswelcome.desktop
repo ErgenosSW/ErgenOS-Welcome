@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=ErgenOS Welcome
+Comment=Get started with ErgenOS
+Exec=ergenos-welcome
+Icon=io.github.ergenossw.ergenoswelcome
+Terminal=false
+Type=Application
+Categories=System;
+StartupNotify=true

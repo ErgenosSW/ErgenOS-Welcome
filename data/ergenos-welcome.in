@@ -1,0 +1,5 @@
+#!@PYTHON@
+
+from ergenos_welcome.app import main
+
+raise SystemExit(main())

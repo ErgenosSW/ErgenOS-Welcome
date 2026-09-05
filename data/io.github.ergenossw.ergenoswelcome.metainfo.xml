@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.ergenossw.ergenoswelcome</id>
+  <name>ErgenOS Welcome</name>
+  <summary>Get started with ErgenOS</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <developer id="io.github.ergenossw">
+    <name>ErgenOS Project</name>
+  </developer>
+  <description>
+    <p>ErgenOS Welcome presents the installed system version and links to project resources.</p>
+  </description>
+  <launchable type="desktop-id">io.github.ergenossw.ergenoswelcome.desktop</launchable>
+  <url type="homepage">https://github.com/ErgenosSW/ErgenOS-Welcome</url>
+  <provides>
+    <binary>ergenos-welcome</binary>
+  </provides>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="0.1.0" date="2026-09-05"/>
+  </releases>
+</component>
