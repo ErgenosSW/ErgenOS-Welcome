@@ -42,7 +42,7 @@ class WelcomeWindow(Adw.ApplicationWindow):
     def __init__(self, application: Adw.Application) -> None:
         super().__init__(application=application)
         self.set_title("ErgenOS Welcome")
-        self.set_default_size(760, 680)
+        self.set_default_size(760, 640)
         self.connect("close-request", self._on_close_request)
 
         toolbar = Adw.ToolbarView()
@@ -116,36 +116,36 @@ class WelcomeWindow(Adw.ApplicationWindow):
             install_button.set_child(install_content)
             content.append(install_button)
 
-        system_group = Adw.PreferencesGroup(title="System")
+        if shutil.which("ergenctl-gui"):
+            actions = Adw.PreferencesGroup(title="Tools")
+            actions.add(
+                self._action_row(
+                    "ErgenCTL",
+                    "Check, repair or restore the system",
+                    "utilities-system-monitor-symbolic",
+                    self._launch_ergenctl,
+                )
+            )
+            content.append(actions)
+
+        system_group = Adw.PreferencesGroup(title="System details")
         system_group.add(self._info_row("Operating system", info.name))
         system_group.add(self._info_row("Build", info.build_id))
         system_group.add(self._info_row("Edition", info.variant))
-        ergenctl_status = "Installed" if shutil.which("ergenctl") else "Not installed"
-        system_group.add(self._info_row("ErgenCTL", ergenctl_status))
         content.append(system_group)
 
-        resources = Adw.PreferencesGroup(
-            title="Project resources",
-            description="Documentation, source code and issue tracking",
-        )
+        resources = Adw.PreferencesGroup(title="ErgenOS online")
         resources.add(
             self._link_row(
-                "ErgenOS on GitHub",
-                "Source code and releases",
+                "Project page",
+                "Source code, releases and documentation",
                 "https://github.com/ErgenosSW/ErgenOS-Linux",
             )
         )
         resources.add(
             self._link_row(
-                "ErgenCTL",
-                "Diagnostics and recovery documentation",
-                "https://github.com/ErgenosSW/ErgenCTL",
-            )
-        )
-        resources.add(
-            self._link_row(
                 "Report a problem",
-                "Open the ErgenOS issue tracker",
+                "Open the issue tracker",
                 "https://github.com/ErgenosSW/ErgenOS-Linux/issues",
             )
         )
@@ -178,6 +178,10 @@ class WelcomeWindow(Adw.ApplicationWindow):
         )
 
     @staticmethod
+    def _launch_ergenctl(_row: Adw.ActionRow) -> None:
+        Gio.Subprocess.new(["ergenctl-gui"], Gio.SubprocessFlags.NONE)
+
+    @staticmethod
     def _info_row(title: str, value: str) -> Adw.ActionRow:
         row = Adw.ActionRow(title=title)
         label = Gtk.Label(label=value, selectable=True, xalign=1)
@@ -194,6 +198,19 @@ class WelcomeWindow(Adw.ApplicationWindow):
             "activated",
             lambda _row: Gio.AppInfo.launch_default_for_uri(uri, None),
         )
+        return row
+
+    @staticmethod
+    def _action_row(
+        title: str,
+        subtitle: str,
+        icon_name: str,
+        callback,
+    ) -> Adw.ActionRow:
+        row = Adw.ActionRow(title=title, subtitle=subtitle, activatable=True)
+        row.add_prefix(Gtk.Image.new_from_icon_name(icon_name))
+        row.add_suffix(Gtk.Image.new_from_icon_name("go-next-symbolic"))
+        row.connect("activated", callback)
         return row
 
 
