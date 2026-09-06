@@ -1,47 +1,37 @@
 # ErgenOS Welcome
 
-ErgenOS Welcome is the first-login application for ErgenOS. It presents the installed system identity, reports whether ErgenCTL is available and provides direct access to project resources.
+<p align="center">
+  <img src="data/io.github.ergenossw.ergenoswelcome.png" alt="ErgenOS logo" width="220">
+</p>
 
-The application is intentionally read-only. It does not install packages, modify repositories or request administrative privileges.
+[![Release](https://img.shields.io/badge/release-0.1.1--alpha-orange)](https://github.com/ErgenosSW/ErgenOS-Welcome/releases)
+[![License](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE)
 
-## Current scope
+ErgenOS Welcome is the welcome application included with [ErgenOS](https://github.com/ErgenosSW/ErgenOS-Linux).
 
-- GTK4 and libadwaita interface
-- system version and build information from `/etc/os-release`
-- ErgenCTL availability indicator
-- ErgenOS installer launcher visible only in the live ISO
-- links to ErgenOS, ErgenCTL and the issue tracker
-- automatic startup after login, enabled by default
-- user-controlled login startup in the installed system
+It presents the system version, provides access to ErgenOS resources and opens the installer when running in the live environment. On an installed system, automatic startup can be disabled from the application.
 
 ## Development
-
-Runtime dependencies:
-
-- Python 3.11 or newer
-- PyGObject
-- GTK4
-- libadwaita
 
 Run from the source tree:
 
 ```bash
-PYTHONPATH=src python -m ergenos_welcome.app
+PYTHONPATH=src python3 -m ergenos_welcome.app
 ```
 
-Run tests:
+Run the test suite:
 
 ```bash
-PYTHONPATH=src python -m unittest discover -s tests -v
+PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
 
-Build and install to a packaging destination:
+Build with Meson:
 
 ```bash
 meson setup build
-DESTDIR=/path/to/package-root meson install -C build
+meson compile -C build
 ```
 
 ## License
 
-ErgenOS Welcome is licensed under GPL-3.0-or-later.
+ErgenOS Welcome is available under the [GPL-3.0-or-later](LICENSE) license.
