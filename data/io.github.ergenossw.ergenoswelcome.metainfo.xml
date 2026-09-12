@@ -12,12 +12,22 @@
     <p>ErgenOS Welcome provides quick access to installation, recovery tools and project resources.</p>
   </description>
   <launchable type="desktop-id">io.github.ergenossw.ergenoswelcome.desktop</launchable>
-  <url type="homepage">https://github.com/ErgenosSW/ErgenOS-Welcome</url>
+  <url type="homepage">https://ergenossw.github.io/ErgenOS-Website/</url>
+  <url type="bugtracker">https://github.com/ErgenosSW/ErgenOS-Welcome/issues</url>
+  <url type="vcs-browser">https://github.com/ErgenosSW/ErgenOS-Welcome</url>
   <provides>
     <binary>ergenos-welcome</binary>
   </provides>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="1.0.1" date="2026-09-12">
+      <description>
+        <ul>
+          <li>Add quick access to ErgenPac and use the current application icons.</li>
+          <li>Add a direct link to the official ErgenOS website.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.0" date="2026-09-06"/>
     <release version="0.1.1" date="2026-09-05"/>
     <release version="0.1.0" date="2026-09-05"/>

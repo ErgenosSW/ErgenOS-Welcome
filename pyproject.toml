@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ergenos-welcome"
-version = "0.1.1"
+version = "1.0.1"
 description = "First-login welcome application for ErgenOS"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -13,7 +13,8 @@ authors = [{name = "ErgenOS Project"}]
 dependencies = ["PyGObject"]
 
 [project.urls]
-Homepage = "https://github.com/ErgenosSW/ErgenOS-Welcome"
+Homepage = "https://ergenossw.github.io/ErgenOS-Website/"
+Source = "https://github.com/ErgenosSW/ErgenOS-Welcome"
 Issues = "https://github.com/ErgenosSW/ErgenOS-Welcome/issues"
 
 [project.scripts]

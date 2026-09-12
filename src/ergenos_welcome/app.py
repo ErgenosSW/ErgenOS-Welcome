@@ -24,6 +24,7 @@ from .system_info import is_live_environment, read_system_info
 
 
 APPLICATION_ID = "io.github.ergenossw.ergenoswelcome"
+ERGENOS_WEBSITE = "https://ergenossw.github.io/ErgenOS-Website/"
 INSTALLED_LOGO_PATH = Path(
     "/usr/share/icons/hicolor/256x256/apps/io.github.ergenossw.ergenoswelcome.png"
 )
@@ -116,16 +117,26 @@ class WelcomeWindow(Adw.ApplicationWindow):
             install_button.set_child(install_content)
             content.append(install_button)
 
-        if shutil.which("ergenctl-gui"):
+        if shutil.which("ergenctl-gui") or shutil.which("ergenpac"):
             actions = Adw.PreferencesGroup(title="Tools")
-            actions.add(
-                self._action_row(
-                    "ErgenCTL",
-                    "Check, repair or restore the system",
-                    "utilities-system-monitor-symbolic",
-                    self._launch_ergenctl,
+            if shutil.which("ergenpac"):
+                actions.add(
+                    self._action_row(
+                        "ErgenPac",
+                        "Install software and update the system",
+                        "io.github.ergenossw.ErgenPac",
+                        self._launch_ergenpac,
+                    )
                 )
-            )
+            if shutil.which("ergenctl-gui"):
+                actions.add(
+                    self._action_row(
+                        "ErgenCTL",
+                        "Check, repair or restore the system",
+                        "ergenctl",
+                        self._launch_ergenctl,
+                    )
+                )
             content.append(actions)
 
         system_group = Adw.PreferencesGroup(title="System details")
@@ -135,6 +146,13 @@ class WelcomeWindow(Adw.ApplicationWindow):
         content.append(system_group)
 
         resources = Adw.PreferencesGroup(title="ErgenOS online")
+        resources.add(
+            self._link_row(
+                "Official website",
+                "Downloads, installation guides and project information",
+                ERGENOS_WEBSITE,
+            )
+        )
         resources.add(
             self._link_row(
                 "Project page",
@@ -182,6 +200,10 @@ class WelcomeWindow(Adw.ApplicationWindow):
         Gio.Subprocess.new(["ergenctl-gui"], Gio.SubprocessFlags.NONE)
 
     @staticmethod
+    def _launch_ergenpac(_row: Adw.ActionRow) -> None:
+        Gio.Subprocess.new(["ergenpac"], Gio.SubprocessFlags.NONE)
+
+    @staticmethod
     def _info_row(title: str, value: str) -> Adw.ActionRow:
         row = Adw.ActionRow(title=title)
         label = Gtk.Label(label=value, selectable=True, xalign=1)
@@ -208,7 +230,9 @@ class WelcomeWindow(Adw.ApplicationWindow):
         callback,
     ) -> Adw.ActionRow:
         row = Adw.ActionRow(title=title, subtitle=subtitle, activatable=True)
-        row.add_prefix(Gtk.Image.new_from_icon_name(icon_name))
+        icon = Gtk.Image.new_from_icon_name(icon_name)
+        icon.set_pixel_size(40)
+        row.add_prefix(icon)
         row.add_suffix(Gtk.Image.new_from_icon_name("go-next-symbolic"))
         row.connect("activated", callback)
         return row
