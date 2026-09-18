@@ -12,8 +12,9 @@ import gi
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-from gi.repository import Adw, Gio, Gtk  # noqa: E402
+from gi.repository import Adw, Gio, GLib, Gtk  # noqa: E402
 
+from .resources import online_resources
 from .settings import (
     autostart_enabled,
     set_autostart_enabled,
@@ -24,7 +25,6 @@ from .system_info import is_live_environment, read_system_info
 
 
 APPLICATION_ID = "io.github.ergenossw.ergenoswelcome"
-ERGENOS_WEBSITE = "https://ergenossw.github.io/ErgenOS-Website/"
 INSTALLED_LOGO_PATH = Path(
     "/usr/share/icons/hicolor/256x256/apps/io.github.ergenossw.ergenoswelcome.png"
 )
@@ -146,27 +146,10 @@ class WelcomeWindow(Adw.ApplicationWindow):
         content.append(system_group)
 
         resources = Adw.PreferencesGroup(title="ErgenOS online")
-        resources.add(
-            self._link_row(
-                "Official website",
-                "Downloads, installation guides and project information",
-                ERGENOS_WEBSITE,
+        for resource in online_resources(GLib.get_language_names()):
+            resources.add(
+                self._link_row(resource.title, resource.subtitle, resource.uri)
             )
-        )
-        resources.add(
-            self._link_row(
-                "Project page",
-                "Source code, releases and documentation",
-                "https://github.com/ErgenosSW/ErgenOS-Linux",
-            )
-        )
-        resources.add(
-            self._link_row(
-                "Report a problem",
-                "Open the issue tracker",
-                "https://github.com/ErgenosSW/ErgenOS-Linux/issues",
-            )
-        )
         content.append(resources)
 
         if not is_live_environment():

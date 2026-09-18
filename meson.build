@@ -1,16 +1,27 @@
 project(
   'ergenos-welcome',
-  version: '1.0.1',
+  version: '1.0.2',
   meson_version: '>=1.3.0',
 )
 
 gnome = import('gnome')
 python = import('python').find_installation('python3')
 
+test_environment = environment()
+test_environment.set('PYTHONPATH', meson.current_source_dir() / 'src')
+test(
+  'unit-tests',
+  python,
+  args: ['-m', 'unittest', 'discover', '-s', 'tests', '-v'],
+  env: test_environment,
+  workdir: meson.current_source_dir(),
+)
+
 python.install_sources(
   files(
     'src/ergenos_welcome/__init__.py',
     'src/ergenos_welcome/app.py',
+    'src/ergenos_welcome/resources.py',
     'src/ergenos_welcome/settings.py',
     'src/ergenos_welcome/system_info.py',
   ),

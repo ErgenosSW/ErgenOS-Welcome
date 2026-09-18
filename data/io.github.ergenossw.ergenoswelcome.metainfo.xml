@@ -20,6 +20,14 @@
   </provides>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="1.0.2" date="2026-09-18">
+      <description>
+        <ul>
+          <li>Add direct access to ErgenOS Wiki and the bug report form.</li>
+          <li>Open localized website and Wiki pages for Polish desktops.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.1" date="2026-09-12">
       <description>
         <ul>
