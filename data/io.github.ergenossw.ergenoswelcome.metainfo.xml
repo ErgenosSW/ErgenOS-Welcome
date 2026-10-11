@@ -20,6 +20,14 @@
   </provides>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="1.0.3" date="2026-10-11">
+      <description>
+        <ul>
+          <li>Refresh the interface with the ErgenOS website and Wiki visual language.</li>
+          <li>Add a branded hero, dark navy surfaces and cyan-blue action accents.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.2" date="2026-09-18">
       <description>
         <ul>
