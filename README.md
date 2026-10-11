@@ -11,6 +11,16 @@ ErgenOS Welcome is the welcome application included with [ErgenOS](https://githu
 
 It opens the installer in the live environment and provides quick access to ErgenPac, ErgenCTL, the official ErgenOS website, ErgenOS Wiki and project resources. Online links follow the desktop language (English or Polish). Automatic startup can be disabled from the application.
 
+## Version 1.0.3 in ErgenOS 1.2
+
+The redesigned welcome portal uses the shared ErgenOS visual style, a custom
+header, action tiles and system information. Version 1.0.2 introduced language-aware
+website/Wiki resources; 1.0.3 brings the visual redesign. The ten-test suite passed
+during release preparation.
+
+Welcome remains a portal with shortcuts, not a step-by-step gaming setup wizard.
+Guided setup is deferred to 1.3. See [CHANGELOG.md](CHANGELOG.md).
+
 ## Development
 
 Run from the source tree:
