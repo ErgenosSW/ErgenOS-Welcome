@@ -1,0 +1,30 @@
+# Maintainer: ErgenOS Project <https://github.com/ErgenosSW>
+
+pkgname=ergenos-welcome
+pkgver=1.0.3
+pkgrel=1
+pkgdesc='First-login welcome application for ErgenOS'
+arch=('any')
+url='https://github.com/ErgenosSW/ErgenOS-Welcome'
+license=('GPL-3.0-or-later')
+depends=('gtk4' 'libadwaita' 'python' 'python-gobject')
+makedepends=('meson')
+source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('f7ba2b1e9541201a247d439aee1a1abf380d9b93d2f09040952d7516905a3842')
+_builddir="build-${pkgver}"
+
+build() {
+  arch-meson "ErgenOS-Welcome-${pkgver}" "${_builddir}"
+  meson compile -C "${_builddir}"
+}
+
+check() {
+  cd "ErgenOS-Welcome-${pkgver}"
+  PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -m unittest discover -s tests -v
+}
+
+package() {
+  meson install -C "${_builddir}" --destdir "${pkgdir}"
+  install -Dm644 "ErgenOS-Welcome-${pkgver}/LICENSE" \
+    "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}

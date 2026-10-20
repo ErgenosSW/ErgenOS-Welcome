@@ -1,0 +1,16 @@
+pkgbase = ergenos-welcome
+	pkgdesc = First-login welcome application for ErgenOS
+	pkgver = 1.0.3
+	pkgrel = 1
+	url = https://github.com/ErgenosSW/ErgenOS-Welcome
+	arch = any
+	license = GPL-3.0-or-later
+	makedepends = meson
+	depends = gtk4
+	depends = libadwaita
+	depends = python
+	depends = python-gobject
+	source = ergenos-welcome-1.0.3.tar.gz::https://github.com/ErgenosSW/ErgenOS-Welcome/archive/refs/tags/v1.0.3.tar.gz
+	sha256sums = f7ba2b1e9541201a247d439aee1a1abf380d9b93d2f09040952d7516905a3842
+
+pkgname = ergenos-welcome
