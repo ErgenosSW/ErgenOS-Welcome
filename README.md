@@ -4,6 +4,7 @@
   <img src="data/io.github.ergenossw.ergenoswelcome.png" alt="ErgenOS logo" width="220">
 </p>
 
+[![Tests](https://github.com/ErgenosSW/ErgenOS-Welcome/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/ErgenosSW/ErgenOS-Welcome/actions/workflows/tests.yml)
 [![Version](https://img.shields.io/badge/version-1.0.3-orange)](https://github.com/ErgenosSW/ErgenOS-Welcome/tree/v1.0.3)
 [![License](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE)
 
